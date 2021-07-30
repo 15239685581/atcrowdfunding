@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
-<html lang="GB18030">
+<html lang="zh-CN">
 <%@include file="/WEB-INF/include-head.jsp" %>
 
 <body>
@@ -48,7 +48,5 @@
         </div>
     </div>
 </div>
-
-</body>
 </html>
 

@@ -2,8 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.3.xsd">
     <!--加载外部属性文件-->
     <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
     <!--配置数据源-->
@@ -34,7 +36,7 @@
                         <props>
                             <!--配置数据库方言,告诉PageHelper当前使用的数据库-->
                             <prop key="dialect">mysql</prop>
-                            <!--配置页码的合理化修正-->
+                            <!--配置页码的合理化修正,在1-总页数之间的修正页码-->
                             <prop key="reasonable">true</prop>
                         </props>
                     </property>
@@ -45,6 +47,5 @@
     <!-- 配置MapperScannerConfigurer来扫描Mapper接口所在的包-->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.atguigu.crowd.mapper"></property>
-
     </bean>
 </beans>

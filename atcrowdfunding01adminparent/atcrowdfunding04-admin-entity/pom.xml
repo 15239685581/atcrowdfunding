@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>atcrowdfunding04-admin-entity</artifactId>
+    <dependencies>
 
+    </dependencies>
 
 </project>

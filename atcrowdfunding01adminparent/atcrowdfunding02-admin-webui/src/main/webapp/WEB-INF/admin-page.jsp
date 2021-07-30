@@ -27,15 +27,16 @@
             num_edge_entries: 3, //边缘页数
             num_display_entries: 6, //主体页数
             callback: pageSelectCallBack,
-            items_per_page:${requestScope.pageInfo.pageSize }, //每页显示1项
+            items_per_page:${requestScope.pageInfo.pageSize }, //每页显示的数量
             current_page: ${requestScope.pageInfo.pageNum - 1 }, //当前页数pageIndex从0开始
-            prex_text: "上一页",
+            prev_text: "上一页",
             next_text: "下一页"
         }
         // 生成页码导航条
         $("#Pagination").pagination(totalRecoed, properties);
     }
 
+    // 回调函数的含义:声明出来以后不是自己调用,而是交给系统或者是框架调用
     // 用户点击“123”这样的页码时调用这个函数实现页面跳转
     function pageSelectCallBack(pageIndex,jQuery) {
         //根据pageIndex计算得到pageNum
@@ -45,6 +46,8 @@
         //由于每一个页码按钮都是超链接，所以我们要在这里取消超链接的默认行为
         return false;
     }
+    //修改源码pagination
+
 </script>
 
 <body>
@@ -109,9 +112,13 @@
                                     </tr>
                                 </c:forEach>
                             </c:if>
-                            </tbody>
+                              </tbody>
                             <tfoot>
                             <tr>
+                                <!--在页面上使用Pagination实现导航条
+                                导入jquery.pagination.js和pagination.css
+                                注意顺序:Pagination要在jQuery后面
+                                -->
                                 <td colspan="6" align="center">
                                     <div id="Pagination" class="pagination"><!-- 这里显示分页 --></div>
                                 </td>

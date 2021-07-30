@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 /*
 * 统一项目中AJAX请求返回的结果，也可以用于分布式架构中各个模块间调用时返回统一类型
+* 泛型：泛型擦除，在编译器就变成限定类型
 * */
 public class ResultEntity<T> implements Serializable {
     public static final String SUCCESS = "SUCCESS";
@@ -70,4 +71,5 @@ public class ResultEntity<T> implements Serializable {
                 ", data=" + data +
                 '}';
     }
+
 }

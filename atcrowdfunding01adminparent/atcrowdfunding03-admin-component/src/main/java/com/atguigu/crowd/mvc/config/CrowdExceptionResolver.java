@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/*
- * 表示当前是一个基于注解异常处理器类
- * */
+//@controllerAdvice表示当前类是一个基于注解的异常处理器类
 @ControllerAdvice
 public class CrowdExceptionResolver {
     @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
@@ -60,8 +58,8 @@ public class CrowdExceptionResolver {
     }
     @ExceptionHandler(value = Exception.class)
     public ModelAndView resolveException(Exception exception,
-                                                    HttpServletRequest request,
-                                                    HttpServletResponse response) {
+                                         HttpServletRequest request,
+                                         HttpServletResponse response) {
         String viewName = "admin-login";
         return commonResolve(viewName, exception, request, response);
     }
@@ -100,3 +98,45 @@ public class CrowdExceptionResolver {
     }
 
 }
+/*@ControllerAdvice
+public class CrowdExceptionResolver {
+
+    //@ExceptionHandler将一个具体的异常类型和一个方法关联起来
+    @ExceptionHandler(value = NullPointerException.class)
+    public ModelAndView resolveNullPointerException(
+            //实际捕获到的异常类型
+            NullPointerException exception,
+            //当前请求对象
+            HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+        //1 判断当前请求类型
+        boolean judgResult = CrowdUtil.judgRequestType(request);
+        //2 如果是Ajax请求
+        if (judgResult)
+        {
+            //3 创建ResultEntity对象
+            ResultEntity<Object> resultEntity = ResultEntity.failed(exception.getMessage());
+
+            //4 创建Gson对象
+            Gson gson = new Gson();
+
+            //5 将ResultEntity对象转换为JSON字符串
+            String json = gson.toJson(resultEntity);
+
+            //6 将JSON字符串作为响应体返回给游览器
+            response.getWriter().write(json);
+
+            //7 由于上面已经通过原生的Response对象返回了响应,所以不提供ModelAndView对象
+            return null;
+        }
+        //8 如果不是Ajax请求则创建ModelAndView对象
+        ModelAndView modelAndView = new ModelAndView();
+        //9 将Exception对象存入模型
+        modelAndView.addObject("exception",exception);
+
+        //10 设置对应的视图名称
+        modelAndView.setViewName("system-error");
+
+        return modelAndView;
+    }
+}*/

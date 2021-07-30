@@ -7,6 +7,7 @@
     <groupId>com.ccctop</groupId>
     <artifactId>atcrowdfunding01-admin-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!--配置聚合-->
     <modules>
         <module>atcrowdfunding02-admin-webui</module>
         <module>atcrowdfunding03-admin-component</module>
@@ -28,6 +29,11 @@
         <dependencies>
             <!-- Spring 依赖 -->
             <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+            <!--spring-orm.jar
+    　　          这个jar文件包含Spring对DAO特性集进行了扩展，使其支持 iBATIS、JDO、OJB、TopLink，
+                 因为Hibernate已经独立成包了，现在不包含在这个包里了。这个jar文件里大部分的类都要依赖
+                 spring-dao.jar里的类，用这个包时你需要同时包含spring-dao.jar包。
+             -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
@@ -42,6 +48,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
                 <version>${atguigu.spring.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
