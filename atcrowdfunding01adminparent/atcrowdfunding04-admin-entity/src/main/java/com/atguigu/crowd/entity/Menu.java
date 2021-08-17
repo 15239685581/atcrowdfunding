@@ -5,17 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu implements Serializable {
+
+    //主键
     private Integer id;
 
+    //父节点ID
     private Integer pid;
 
+    //节点名称
     private String name;
 
+    //节点附带的URL地址，是将来点击菜单项要跳转的地址
     private String url;
 
     private String icon;
 
     private List<Menu> children = new ArrayList<>();
+
+    //控制节点是否默认为打开装，设置为true表示默认打开
+    private Boolean open = true;
 
     @Override
     public String toString() {
@@ -43,7 +51,7 @@ public class Menu implements Serializable {
     public Menu() {
     }
 
-    private Boolean open = true;
+
 
     public List<Menu> getChildren() {
         return children;

@@ -1,27 +1,18 @@
 package com.atguigu.crowd.entity;
 
-import java.io.Serializable;
-
-public class Role implements Serializable {
-    private Integer id;
-
-    private String name;
+public class Role {
 
     public Role() {
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 
     public Role(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
+
+    private Integer id;
+
+    private String name;
 
     public Integer getId() {
         return id;
@@ -37,5 +28,13 @@ public class Role implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

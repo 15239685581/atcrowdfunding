@@ -46,10 +46,12 @@ public class ResultEntity<T> implements Serializable {
         return new ResultEntity<Type>(SUCCESS, null, null);
     }
     //请求处理成功且需要数据时使用的工具方法  要返回的数据
+
     public static <Type> ResultEntity<Type> successWithData(Type data) {
         return new ResultEntity<Type>(SUCCESS, null, data);
     }
-    //请求处理失败后使用的工具方法   失败的错误消息
+
+    //请求处理失败后使用的工具方法失败的错误消息
     public static <Type> ResultEntity<Type> failed(String message) {
         return new ResultEntity<Type>(FAILED, message, null);
     }

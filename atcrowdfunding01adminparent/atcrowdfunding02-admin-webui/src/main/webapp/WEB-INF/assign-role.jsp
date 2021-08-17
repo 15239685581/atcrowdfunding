@@ -12,29 +12,30 @@
 <%@include file="/WEB-INF/include-head.jsp" %>
 <script type="text/javascript">
     $(function () {
-        $("#toRightBtn").click(function(){
-// select 是标签选择器
-// :eq(0)表示选择页面上的第一个
-// :eq(1)表示选择页面上的第二个
-// “>”表示选择子元素
-// :selected 表示选择“被选中的”option
-// appendTo()能够将 jQuery 对象追加到指定的位置
+        $("#toRightBtn").click(function()
+        {
+        // select 是标签选择器
+        // :eq(0)表示选择页面上的第一个
+        // :eq(1)表示选择页面上的第二个
+        // “>”表示选择子元素
+        // :selected 表示选择“被选中的”option
+        // appendTo()能够将 jQuery 对象追加到指定的位置
             $("select:eq(0)>option:selected").appendTo("select:eq(1)");
         })
         $("#toLeftBtn").click(function(){
-// select 是标签选择器
-// :eq(0)表示选择页面上的第一个
-            // :eq(1)表示选择页面上的第二个
-// “>”表示选择子元素
-// :selected 表示选择“被选中的”option
-// appendTo()能够将 jQuery 对象追加到指定的位置
+        // select 是标签选择器
+        // :eq(0)表示选择页面上的第一个
+                    // :eq(1)表示选择页面上的第二个
+        // “>”表示选择子元素
+        // :selected 表示选择“被选中的”option
+        // appendTo()能够将 jQuery 对象追加到指定的位置
             $("select:eq(1)>option:selected").appendTo("select:eq(0)");
-        })
-    });
-    $("#submitBtn").click(function(){
-    // 在提交表单前把“已分配”部分的 option 全部选中
-        $("select:eq(1)>option").prop("selected","selected");
-    });
+            })
+        });
+        $("#submitBtn").click(function(){
+        // 在提交表单前把“已分配”部分的 option 全部选中
+            $("select:eq(1)>option").prop("selected","selected");
+        });
 </script>
 <body>
 
@@ -54,7 +55,6 @@
                         <input type="hidden" name="adminId" value="${param.adminId }">
                         <input type="hidden" name="pageNum" value="${param.pageNum }">
                         <input type="hidden" name="keyword" value="${param.keyword }">
-
                         <div class="form-group">
                             <%--@declare id="exampleinputpassword1"--%><label for="exampleInputPassword1">未分配角色列表</label><br>
                             <select class="form-control" multiple="multiple" size="10" style="width:100px;overflow-y:auto;">

@@ -5,17 +5,22 @@ import com.atguigu.crowd.entity.AdminExample;
 import com.atguigu.crowd.mapper.AdminMapper;
 import com.atguigu.crowd.service.api.AdminService;
 import com.ccctop.crowd.constant.CrowdConstant;
+import com.ccctop.crowd.exception.LoginAcctAlreadyInUseException;
+import com.ccctop.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.ccctop.crowd.exception.LoginFaildException;
 import com.ccctop.crowd.util.CrowdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 
 //查找实现类快捷键ctrl+alt+B
@@ -26,18 +31,32 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public void saveAdmin(Admin admin) {
         //1 密码加密
-        String userPswd = CrowdUtil.md5(admin.getUserPswd());
+        String userPswd = admin.getUserPswd();
+        // = CrowdUtil.md5(admin.getUserPswd());
+        userPswd = passwordEncoder.encode(userPswd);
         admin.setUserPswd(userPswd);
         //2 生成创建时间
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createTime = format.format(date);
         admin.setCreateTime(createTime);
-        adminMapper.insert(admin);
-        throw new RuntimeException();
+        try {
+            adminMapper.insert(admin);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            if (e instanceof DuplicateKeyException)
+            {
+                throw new  LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            }
+        }
+
     }
 
     @Override
@@ -89,6 +108,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Admin getAdminById(Integer adminId) {
+        return adminMapper.selectByPrimaryKey(adminId);
+    }
+
+    @Override
     public PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize) {
         //1 调用Pagehelper的静态方法开启分页功能
         //这里充分体现了pageHelper的 非侵入式设计:原本要做的查询不必有任何修改
@@ -102,5 +126,52 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void remove(Integer adminId) {
         adminMapper.deleteByPrimaryKey(adminId);
+    }
+
+    @Override
+    public void update(Admin admin)
+    {
+        //selective 表示有选择的更新，对于null值的字段不更新
+        try
+        {
+            adminMapper.updateByPrimaryKeySelective(admin);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            if (e instanceof DuplicateKeyException)
+            {
+                throw new LoginAcctAlreadyInUseForUpdateException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            }
+        }
+
+    }
+
+    @Override
+    public void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
+
+        //1 根据adminId删除旧的关联关系数据
+        adminMapper.deleteOldRelationship(adminId);
+
+        //2 根据roleIdList和adminId保存新的关联关系
+        if (roleIdList != null && roleIdList.size() >0)
+        {
+            adminMapper.insertNewRelationShip(adminId,roleIdList);
+        }
+    }
+
+    @Override
+    public Admin getAdminByLoginAcct(String username) {
+
+        AdminExample example = new AdminExample();
+
+        AdminExample.Criteria criteria = example.createCriteria();
+
+        criteria.andLoginAcctEqualTo(username);
+
+        List<Admin> list = adminMapper.selectByExample(example);
+
+        Admin admin = list.get(0);
+
+        return admin;
     }
 }

@@ -1,5 +1,7 @@
 import com.atguigu.crowd.entity.Admin;
+import com.atguigu.crowd.entity.Role;
 import com.atguigu.crowd.mapper.AdminMapper;
+import com.atguigu.crowd.mapper.RoleMapper;
 import com.atguigu.crowd.service.api.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +26,9 @@ public class CrowdTest {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
 
     @Test
@@ -67,6 +72,17 @@ public class CrowdTest {
         int count = adminMapper.insert(admin);
         //
         System.out.println("受到影响的行数="+count);*/
+    }
+
+    @Test
+    public void testInsertRole()
+    {
+        Role role = new Role();
+        for (int i= 1; i < 238; i++)
+        {
+            role.setName("role"+i);
+            roleMapper.insert(role);
+        }
     }
 
     @Test

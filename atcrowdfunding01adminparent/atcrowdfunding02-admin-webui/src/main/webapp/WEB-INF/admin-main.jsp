@@ -9,9 +9,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <%@include file="/WEB-INF/include-head.jsp" %>
-
 <body>
-
 <%@include file="/WEB-INF/include-nav.jsp" %>
 <div class="container-fluid">
     <div class="row">
@@ -20,18 +18,23 @@
             <h1 class="page-header">控制面板</h1>
 
             <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive"
-                         alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
+                <%--页面元素的权限控制--%>
+                <security:authorize access="hasRole('经理')">
+                    <div class="col-xs-6 col-sm-3 placeholder">
+                        <img data-src="holder.js/200x200/auto/sky" class="img-responsive"
+                             alt="Generic placeholder thumbnail">
+                        <h4>Label</h4>
+                        <span class="text-muted">Something else</span>
+                    </div>
+                </security:authorize>
+                <security:authorize access="hasAuthority('role:delete')">
                 <div class="col-xs-6 col-sm-3 placeholder">
                     <img data-src="holder.js/200x200/auto/vine" class="img-responsive"
                          alt="Generic placeholder thumbnail">
                     <h4>Label</h4>
                     <span class="text-muted">Something else</span>
                 </div>
+                </security:authorize>
                 <div class="col-xs-6 col-sm-3 placeholder">
                     <img data-src="holder.js/200x200/auto/sky" class="img-responsive"
                          alt="Generic placeholder thumbnail">
@@ -48,5 +51,6 @@
         </div>
     </div>
 </div>
+</body>
 </html>
 

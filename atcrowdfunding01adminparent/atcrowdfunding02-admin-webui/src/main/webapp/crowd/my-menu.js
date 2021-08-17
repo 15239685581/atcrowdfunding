@@ -6,15 +6,19 @@ function  generateTree() {
         "dataType": "json",
         "success": function (response) {
             var result = response.result;
-            if (result == "SUCCESS") {
+            if (result == "SUCCESS")
+            {
                 // 2.创建JSON对象用于存储对zTree所做的设置
                 var setting = {
                     "view":{
                         "addDiyDom": myAddDiyDom,
+                        //在鼠标移入时添加按钮组
                         "addHoverDom":myAddHoverDom,
+                        //在鼠标移除时移除按钮组
                         "removeHoverDom":myRemoveHoverDom
                     },
                     "data":{
+                        //设置key值不存在，点了不跑
                         "key":{
                             "url":"maomi"
                         }

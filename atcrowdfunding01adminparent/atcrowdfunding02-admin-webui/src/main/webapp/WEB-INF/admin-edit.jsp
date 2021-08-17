@@ -27,10 +27,11 @@
                 <div class="panel-body">
                     <form action="admin/update.html" method="post" role="form">
                         <input type="hidden" name="id" value="${requestScope.admin.id}">
+                        <!-- ${param.name} 等价于  request.getParamterValues(“name”) -->
                         <input type="hidden" name="pageNum" value="${param.pageNum }">
                         <input type="hidden" name="keyword" value="${param.keyword }">
-                        <p>${requestScope.exception.message }</p>
-                        <div class="form-group">
+                        <div class="f <p>${requestScope.exception.message }</p>
+                        <dorm-group">
                             <label for="exampleInputPassword1">登陆账号</label>
                             <input value="${requestScope.admin.loginAcct }" name="loginAcct" type="text" class="form-control" id="exampleInputPassword1" placeholder="请输入登陆账号">
                         </div>

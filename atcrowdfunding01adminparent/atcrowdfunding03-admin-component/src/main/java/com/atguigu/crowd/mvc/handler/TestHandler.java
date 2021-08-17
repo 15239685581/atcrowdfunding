@@ -71,4 +71,11 @@ public class TestHandler {
         return "target";
     }
 
+    @ResponseBody
+    @RequestMapping("/test/ajax/async.html")
+    public String testAsync() throws InterruptedException {
+        Thread.sleep(2000);
+        return "success";
+    }
+
 }

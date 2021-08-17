@@ -1,5 +1,4 @@
 package com.atguigu.crowd.mvc.config;
-
 import com.ccctop.crowd.constant.CrowdConstant;
 import com.ccctop.crowd.exception.LoginAcctAlreadyInUseException;
 import com.ccctop.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
@@ -10,14 +9,15 @@ import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //@controllerAdvice表示当前类是一个基于注解的异常处理器类
+
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
     @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
     public ModelAndView resolveLoginAcctAlreadyInUseException(LoginAcctAlreadyInUseException exception, HttpServletRequest request, HttpServletResponse response) {
         String viewName = "admin-add";
@@ -56,11 +56,14 @@ public class CrowdExceptionResolver {
         String viewName = "system-error";
         return commonResolve(viewName, exception, request, response);
     }
+
+
     @ExceptionHandler(value = Exception.class)
     public ModelAndView resolveException(Exception exception,
                                          HttpServletRequest request,
                                          HttpServletResponse response) {
-        String viewName = "admin-login";
+        //String viewName = "admin-login";
+        String viewName = "system-error";
         return commonResolve(viewName, exception, request, response);
     }
 
@@ -91,12 +94,11 @@ public class CrowdExceptionResolver {
         //不是ajax请求
         ModelAndView modelAndView = new ModelAndView();
         //1.将exception对象存入模型
-        modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION, exception);
+        modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION,exception);
         //2.设置对应视图
         modelAndView.setViewName(viewName);
         return modelAndView;
     }
-
 }
 /*@ControllerAdvice
 public class CrowdExceptionResolver {

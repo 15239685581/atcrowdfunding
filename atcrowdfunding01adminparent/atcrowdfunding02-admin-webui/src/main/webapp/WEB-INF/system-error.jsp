@@ -52,6 +52,7 @@
         requestScope.exception.message == exception.getMessage（）
     --%>
     <h3>${requestScope.exception.message }</h3>
+    <%--<button style="width:150px;margin: 50px auto 0px auto" class="btn btn-lg btn-success"><a href="admin/to/login/page.html">登录</a></button>--%>
     <button style="width:150px;margin: 50px auto 0px auto" class="btn btn-lg btn-success btn-block">点我返回上一步</button>
 
 </div>

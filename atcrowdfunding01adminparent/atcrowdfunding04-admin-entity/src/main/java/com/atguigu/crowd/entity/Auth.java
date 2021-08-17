@@ -11,6 +11,7 @@ public class Auth implements Serializable {
 
     private Integer categoryId;
 
+
     public Auth(Integer id, String name, String title, Integer categoryId) {
         this.id = id;
         this.name = name;

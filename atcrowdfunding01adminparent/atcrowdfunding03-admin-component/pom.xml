@@ -64,26 +64,31 @@
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
         </dependency>
+
         <!-- MySQL 驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
         <!-- 数据源 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
+
         <!-- MyBatis 与 Spring 整合 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
         </dependency>
+
         <!-- MyBatis 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
         </dependency>
+
         <!-- 日志 -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -93,12 +98,12 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
+
         <!-- 其他日志框架的中间转换包 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
-
 
         <!-- Spring 进行 JSON 数据转换依赖 -->
         <dependency>
@@ -119,12 +124,15 @@
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-        <!--<dependency>
+
+        <!--springSecurity相关依赖-->
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
         </dependency>
@@ -135,7 +143,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-        </dependency>-->
+        </dependency>
 
     </dependencies>
 

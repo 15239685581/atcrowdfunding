@@ -100,6 +100,7 @@
 
 </head>
 <body>
+    <% pageContext.forward("admin/to/login/page.html");   %>
     <a href="test/ssm.html">测试SSM整合环境</a>
     <br/>
     <br/>

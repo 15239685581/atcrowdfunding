@@ -15,6 +15,7 @@
 <script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="crowd/my-role.js"></script>
 <script type="text/javascript">
+    //$(document).ready(function(){})的简写
     $(function () {
         // 1,为分页操作准备初始化操作
         window.pageNum = 1;
@@ -22,6 +23,7 @@
         window.keyword = "";
         // 2.调用执行分页的函数，执行分页的效果
         generatePage();
+
         // 3.给查询按钮绑定单击响应函数
         $("#searchBtn").click(function () {
             // 1.获取关键词数据赋值给全局变量
@@ -29,13 +31,18 @@
             // 2,调用分页函数刷新页面
             generatePage();
         });
+
         // 4.点击新增按钮打开模态框
-        $("#showModelBtn").click(function () {
+        $("#showModelBtn").click(function() {
             $("#addModal").modal("show");
         });
         // 5.给新增模态框中的保存按钮绑定单击响应函数
-        $("#saveRoleBtn").click(function () {
+        $("#saveRoleBtn").click(function()
+        {
             // 1.获取用户在文本框中输入的角色名称
+            //#addModal表示找到整个模态框
+            //空格表示后代元素中继续查找
+            //[name = roleName]表示匹配name属性等于roleName的元素
             var roleName = $.trim($("#addModal [name=roleName]").val());
             // 2.发送ajax请求
             $.ajax({
@@ -47,14 +54,17 @@
                 "dataType": "json",
                 "success": function (response) {
                     var result = response.result;
-                    if (result == "SUCCESS") {
+                    if (result == "SUCCESS")
+                    {
                         layer.msg("操作成功!");
+                        //将页码定位到最后一页
+                        window.pageNum = 999999999;
+                        // 重新加载分页
+                        generatePage();
                     }
                     if (result == "FAILED") {
                         layer.msg("操作失败！" + response.message)
                     }
-                    // 重新加载分页
-                    generatePage();
                 },
                 "error": function (response) {
                     layer.msg(response.status + " " + response.statusText);
@@ -64,12 +74,12 @@
             $("#addModal").modal("hide");
             // 清理模态框
             $("#addModal [name=roleName]").val("");
-
         });
         /*        // 6.给页面上的铅笔按钮绑定单击响应函数，目的是打开模态框
                 $(".pencilBtn").click(function () {
 
-                });*/
+                });
+        */
         // 使用jq对象的on（）解决上面问题
         // 1.首先找到所有“动态生成“的元素所附着的”静态“元素
         // 2.on函数的第一个参数是事件类型，第二个参数是真正要绑定事件的选择器
@@ -90,7 +100,7 @@
         $("#updateRoleBtn").click(function () {
             // ①从文本框中获取新的角色名称
             var roleName = $("#editModal [name=roleName]").val();
-// ②发送 Ajax 请求执行更新
+            // ②发送 Ajax 请求执行更新
             $.ajax({
                 "url": "role/update.json",
                 "type": "post",
@@ -103,7 +113,7 @@
                     var result = response.result;
                     if (result == "SUCCESS") {
                         layer.msg("操作成功！");
-// 重新加载分页数据
+                        // 重新加载分页数据
                         generatePage();
                     }
                     if (result == "FAILED") {
@@ -114,7 +124,7 @@
                     layer.msg(response.status + " " + response.statusText);
                 }
             });
-// ③关闭模态框
+        // ③关闭模态框
             $("#editModal").modal("hide");
         });
         // 8.点击确认模态框中的确认删除按钮执行删除
@@ -128,14 +138,16 @@
                 "data": requestBody,
                 "contentType": "application/json;charset=UTF-8",
                 "dataType": "json",
-                "success": function (response) {
+                "success": function (response)
+                {
                     var result = response.result;
                     if (result == "SUCCESS") {
                         layer.msg("操作成功！");
-// 重新加载分页数据
+                        // 重新加载分页数据
                         generatePage();
                     }
-                    if (result == "FAILED") {
+                    if (result == "FAILED")
+                    {
                         layer.msg("操作失败！" + response.message);
                     }
                 },
@@ -168,6 +180,7 @@
             // 2.用当前多选框的状态去设置其他多选框
             $('.itemBox').prop("checked", currentStatus);
         });
+
         // 11.全选、全不选的反向操作
         $("#rolePageBody").on("click", ".itemBox", function () {
             // 获取当前已经选中的.itemBox的数量
@@ -221,7 +234,7 @@
             // [3]获取全部被勾选的节点
             var checkedNodes = zTreeObj.getCheckedNodes();
             // [4]遍历 checkedNodes
-            for (var i = 0; i < checkedNodes.length; i++) {
+            for(var i = 0; i < checkedNodes.length; i++) {
                 var checkedNode = checkedNodes[i];
                 var authId = checkedNode.id;
                 authIdArray.push(authId);
@@ -232,6 +245,7 @@
                 // 为了服务器端 handler 方法能够统一使用 List<Integer>方式接收数据，roleId 也存入数组
                 "roleId":[window.roleId]
             }
+
             requestBody = JSON.stringify(requestBody);
             $.ajax({
                 "url": "assign/do/role/assign/auth.json",
@@ -315,6 +329,7 @@
         </div>
     </div>
 </div>
+<!--模态框-->
 <%@include file="/WEB-INF/model-role-add.jsp" %>
 <%@include file="/WEB-INF/model-role-edit.jsp" %>
 <%@include file="/WEB-INF/model-role-confirm.jsp" %>

@@ -48,25 +48,23 @@
         <mvc:view-controller path="/admin/to/login/page.html"  view-name="admin-login"/>
         <mvc:view-controller path="/admin/to/main/page.html"   view-name="admin-main"/>
         <mvc:view-controller path="/admin/to/add/page.html"  view-name="admin-add"/>
-        <!--注册拦截器-->
-        <mvn:interceptors>
+        <mvc:view-controller path="/role/to/page.html" view-name="role-page"/>
+        <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>
+
+        <!--注册拦截器 使用springSecurity后当前自定义的登录拦截器不再使用了
+        -->
+  <!--      <mvn:interceptors>
             <mvn:interceptor>
-                    <!--mvn:mapping配置要拦截的资源-->
-                    <!--/*对应一层路径,比如:/aaa-->
-                    <!--/** 对应多层路径,比如:/aaa/bbb或/aaa/bbb/ccc-->
+                    &lt;!&ndash;mvn:mapping配置要拦截的资源&ndash;&gt;
+                    &lt;!&ndash;/*对应一层路径,比如:/aaa&ndash;&gt;
+                    &lt;!&ndash;/** 对应多层路径,比如:/aaa/bbb或/aaa/bbb/ccc&ndash;&gt;
                     <mvc:mapping path="/**"/>
 
-                    <!--不拦截的资源-->
+                    &lt;!&ndash;不拦截的资源&ndash;&gt;
                     <mvc:exclude-mapping path="/admin/to/login/page.html"/>
                     <mvc:exclude-mapping path="/admin/do/login.html"/>
                     <mvn:exclude-mapping path="/admin/do/logout.html"/>
                     <bean class="com.atguigu.crowd.mvc.interceptor.LoginInterceptor"></bean>
             </mvn:interceptor>
-        </mvn:interceptors>
-    
-    
-    
-    
-    
-    
+        </mvn:interceptors>-->
 </beans>

@@ -59,7 +59,7 @@
                 }
             });
             $("#menuAddModal").modal("hide");
-            // 清空表单
+            // 清空表单，相当于用户点了一下重置
             $("#menuResetBtn").click();
         });
         // 给添加子结点按钮绑定单击响应函数

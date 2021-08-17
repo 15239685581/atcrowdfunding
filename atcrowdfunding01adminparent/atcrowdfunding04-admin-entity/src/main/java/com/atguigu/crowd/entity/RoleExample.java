@@ -1,10 +1,9 @@
 package com.atguigu.crowd.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleExample implements Serializable {
+public class RoleExample {
     protected String orderByClause;
 
     protected boolean distinct;

@@ -23,7 +23,8 @@
         // 获取总记录数
         var totalRecoed = ${requestScope.pageInfo.total };
         // 声明一个JSON对象存储Pagination要设置的属性
-        var properties = {
+        var properties =
+        {
             num_edge_entries: 3, //边缘页数
             num_display_entries: 6, //主体页数
             callback: pageSelectCallBack,
@@ -32,6 +33,7 @@
             prev_text: "上一页",
             next_text: "下一页"
         }
+
         // 生成页码导航条
         $("#Pagination").pagination(totalRecoed, properties);
     }

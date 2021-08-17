@@ -28,6 +28,7 @@ function fillAuthTree() {
                 "name": "title"
             }
         },
+        //设置checkbox
         "check": {
             "enable": true
         }
@@ -111,8 +112,9 @@ function getPageInfoRemote() {
             "keyword": window.keyword
         },
         "async": false,
-        "dataType": "json"
+        "dataType":"json"
     });
+    // console.log(ajaxRs);
     var statusCode = ajaxRs.status;
     // 发生错误
     if (statusCode != 200) {
@@ -121,15 +123,19 @@ function getPageInfoRemote() {
     }
     // 如果响应状态码是200表示请求成功
     var resultEntity = ajaxRs.responseJSON;
+
     // 从resultEntity中获取result属性
     var result = resultEntity.result;
+
     // 判断result是否成功
     if (result == "FAILED") {
         layer.msg(resultEntity.message);
         return null;
     }
+
     // 确认result为成功后获取pageInfo
     var pageInfo = resultEntity.data;
+
     // 返回pageInfo
     return pageInfo;
 }
@@ -140,6 +146,7 @@ function fillTableBody(pageInfo) {
     $("#rolePageBody").empty();
     // 为了搜索没有结果时不显示页码
     $("#Pagination").empty();
+
     // 判断pageInfo是否有效
     if (pageInfo == null || pageInfo == undefined || pageInfo.list.length == 0) {
         $("#rolePageBody").append("<tr><td colspan='4'>抱歉！没有查询到您要的数据！</td></tr>");
@@ -150,6 +157,7 @@ function fillTableBody(pageInfo) {
         var role = pageInfo.list[i];
         var roleId = role.id;
         var roleName = role.name;
+
         var numberTd = "<td>" + (i + 1) + "</td>";
         var checkboxTd = "<td><input id='" + roleId + "' class='itemBox' type='checkbox'></td>"
         var roleNameTd = "<td>" + roleName + "</td>"
@@ -187,7 +195,7 @@ function generateNavigator(pageInfo) {
 
 // 翻页时的回调函数
 function paginationCallBack(pageIndex, jQuery) {
-// 修改 window 对象的 pageNum 属性
+    // 修改 window 对象的 pageNum 属性
     window.pageNum = pageIndex + 1;
     // 调用分页函数
     generatePage();
